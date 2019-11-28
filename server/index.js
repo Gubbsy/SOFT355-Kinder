@@ -1,14 +1,14 @@
-var http = require("http");
-var port = 9000;
+var express = require("express");
+var app = express();
 
-function sayHello() {
-  return "Hello World from Node";
-}
+var helloControler = require("./controller/helloWorldControler");
 
-var server = http.createServer(function(request, response) {
-  response.end(sayHello(request));
+port = 9000;
+
+app.get("/", function(request, response) {
+  response.send(helloControler.helloWorld());
 });
 
-server.listen(port, function() {
+app.listen(port, function() {
   console.log("Server listening on port " + port);
 })
