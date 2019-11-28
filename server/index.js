@@ -1,13 +1,13 @@
 var express = require("express");
 var app = express();
+var bodyParser = require('body-parser');
+var routes = require("./routes/router")
 
-var helloControler = require("./controller/helloWorldControler");
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
+app.use(routes);
 port = 9000;
-
-app.get("/", function(request, response) {
-  response.send(helloControler.helloWorld());
-});
 
 app.listen(port, function() {
   console.log("Server listening on port " + port);
