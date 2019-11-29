@@ -3,36 +3,45 @@ var mongoose = require("mongoose");
 const fetch = require("node-fetch")
 
 const CatApiURL = process.env.CAT_API_IRL || "https://api.thecatapi.com/v1/images/search"
-
 let schema = require("./model/db-schema")
-
 mongoCon = process.env.MONGO_URI;
 
-mongoose.connect(mongoCon, {useNewUrlParser: true, useUnifiedTopology: true}).then((test) => {
-  console.log("Connected to DB");
-});
+Seed();
 
-async function AddCat(){
+
+const AddCat = async () => {
   fetch(CatApiURL)
-    .then((resp) => resp.json())
-    .then(function(data){
+  .catch(err => console.log(err))
+  .then(res => res.json())
+    .then(async function(data){
+      data = data[0]
       breedName = "undifined";
-      if(data[0].breeds)
-          data[0].breeds.forEach((breed) => breedName = breed.name);
+     
       var cat = new schema.Cat({
-        id: data.id,
-        url: data.url,
-        breed: breedName,
+        catId: data.id,
+        imageUrl: data.url,
         width: data.width,
         height: data.height,
         score: 0
       });
-      await cat.save();
+      
+      await cat.save((err, createdCat) => {
+        if (err) 
+          console.log(err);
+        else
+          console.log("Cat created: " + createdCat)
+      });
     });
-    return cat;
-  }
-
-for(i = 0; i < 50; i++) {
-  addedCat = AddCat();
-  console.log("Added cat with id: " + addedCat.id);
 }
+
+function Seed(){
+  mongoose.connect(mongoCon, {useNewUrlParser: true, useUnifiedTopology: true}).then((test) => {
+    console.log("Connected to DB");
+    
+    for(i = 0; i < 50; i++) {
+      AddCat();
+    }
+  });
+}
+
+

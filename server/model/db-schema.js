@@ -1,9 +1,8 @@
 var mongoose = require("mongoose");
 
 var Cat = mongoose.model("Cat", {
-  id: String, 
+  catId: String, 
   imageUrl: String,
-  breed: String,
   width: Number,
   height: Number,
   score: Number});
