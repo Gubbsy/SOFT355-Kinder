@@ -9,7 +9,7 @@ mongoCon = process.env.MONGO_URI;
 Seed();
 
 
-const AddCat = async () => {
+const AddCat = () => {
   fetch(CatApiURL)
   .catch(err => console.log(err))
   .then(res => res.json())
