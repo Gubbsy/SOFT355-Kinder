@@ -15,7 +15,7 @@ mongoCon = process.env.MONGO_URI;
 
 app.listen(port, function() {
   console.log("Server listening on port " + port);
-  mongoose.connect(mongoCon, {useNewUrlParser: true, useUnifiedTopology: true}).then((test) => {
-    console.log("Connected to DB");
-});
+//   mongoose.connect(mongoCon, {useNewUrlParser: true, useUnifiedTopology: true}).then((test) => {
+//     console.log("Connected to DB");
+// });
 })
