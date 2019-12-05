@@ -4,8 +4,10 @@ class CatController {
     this.catRepository = _catRepository;
   }
   
-  async getCats(req, resp) {
+  async getCat(req, resp) {
     console.log("hit cat controller")
+
+    let cat = this.catRepository.getCat(1);
 
     //cheeck recieved valid search value.
     // Make find, and interigate the search.

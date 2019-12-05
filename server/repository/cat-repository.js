@@ -1,12 +1,13 @@
-var mongoose = require("mongoose");
+const CatModel = require("../model/cat-model")
 
-var CatRepository = mongoose.model("Cat", {
-  catId: String, 
-  imageUrl: String,
-  width: Number,
-  height: Number,
-  score: Number
-});
+class CatRepository {
+  constructor(){
+    this.cat = CatModel;
+  }
 
-  module.exports = CatRepository;
+  async getCat(id){
+    return this.cat.findOne({id});
+  }
+}
 
+module.exports = CatRepository;
