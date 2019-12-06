@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 
-var CatRepository = mongoose.model("Cat", {
+var CatModel = mongoose.model("Cat", {
   catId: String, 
   imageUrl: String,
   width: Number,
@@ -8,5 +8,5 @@ var CatRepository = mongoose.model("Cat", {
   score: Number
 });
 
-  module.exports = CatRepository;
+module.exports = CatModel;
 

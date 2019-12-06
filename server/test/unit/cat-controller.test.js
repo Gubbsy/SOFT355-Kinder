@@ -3,36 +3,24 @@ const sinon = require("sinon");
 
 const expect = chai.expect;
 
-const CatRepository = require("../../repository/cat-repository");
+const CatRepository = require("../mocks/cat-repository.mock");
 const CatController = require("../../controller/cat-controller");
+
+let Request = require("../mocks/request.mock");
+let Response = require("../mocks/response.mock");
 
 describe("Cat Controller", function(){
   describe("get cat", function() {
-    let status, json, res, catController, catRepository
+    it("should return hello", function() {
+      req = new Request({id: 1}, "headers");
+      res = new Response();
 
-    
+      catRepo = new CatRepository();
+      catController = new CatController(catRepo);
 
-    beforeEach(() => {
-      status = sinon.stub();
-      json = sinon.spy();
-      res = { json, status };
-      status.returns(res);
+      catController.getCat(req, res)
 
-      catRepository = new CatRepository();
-      catController = new CatController(catRepository)
-
-      console.log("cat repo: " + typeof(catRepository))
-      console.log("cat repo: " + typeof(catRepository))
-      //sinon.stub(CatRepository, 'findCat').resolves();
-    });
-
-    it("should not find a cat when no ID is prvided", async function() {
-      const req = {body: {}};
-      
-      //sinon.stub(CatRepository, "getCat").resolves()
-     
-      //expect(stub.calledOnce).to.be.true;
-      
+      expect(res.body).to.have.property("hello","hello")
     })
   })
 });

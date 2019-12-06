@@ -1,8 +1,6 @@
-const CatModel = require("../model/cat-model")
-
 class CatRepository {
-  constructor(){
-    this.cat = CatModel;
+  constructor(_catModel){
+    this.cat = _catModel;
   }
 
   async getCat(id){
