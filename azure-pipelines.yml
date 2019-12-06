@@ -35,7 +35,7 @@ steps:
   workingDirectory: 'server'
 
 - script: |
-    npm run test
-    npm run build
-  displayName: 'npm test and build client'
+   npm run build
+   npm run test
+  displayName: 'npm build and test client'
   workingDirectory: 'kinder'
