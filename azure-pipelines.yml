@@ -23,7 +23,7 @@ steps:
 - task: Npm@1
   inputs:
     command: 'install'
-    workingDir: 'kinder'
+    workingDir: 'client'
 - task: NodeTool@0
   inputs:
     versionSpec: '10.16.3'
@@ -38,4 +38,4 @@ steps:
     npm run test
     npm run build
   displayName: 'npm test and build client'
-  workingDirectory: 'kinder'
+  workingDirectory: 'client'
