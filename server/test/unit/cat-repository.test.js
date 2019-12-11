@@ -4,7 +4,7 @@ const sinon = require("sinon");
 const expect = chai.expect;
 
 const CatRepository = require("../../repository/cat-repository");
-const CatModel = require("../mocks/cat-model.mock") 
+const CatModelMock = require("../mocks/cat-model.mock") 
 
 
 // Mock repository methods and return types
@@ -19,8 +19,8 @@ describe("Cat Repository", function(){
 
       findId = 1;
 
-      const catModel = new CatModel();
-      const catRepo = new CatRepository(catModel);
+      const mockCatModel = new CatModelMock();
+      const catRepo = new CatRepository(mockCatModel);
       
 
       cat = await catRepo.getCat(findId);
