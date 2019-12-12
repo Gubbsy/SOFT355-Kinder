@@ -1,8 +1,12 @@
 class MockCatRepository {
   constructor() {}
 
-   async getCat({id}) {
-    throw new Error("Error getting cat with repository")
+  async findCat({id}) {
+    throw new Error("Error finding cat")
+  }
+
+  async getCats({id}) {
+    throw new Error("Error getting all cats")
   }
 }
 
