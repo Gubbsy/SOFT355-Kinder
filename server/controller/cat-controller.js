@@ -5,22 +5,24 @@ class CatController {
   }
   
   async getCat(req, res) {
-    console.log("hit cat controller")
-
-    let cat = this.catRepository.getCat(1)
-
-    //cheeck recieved valid search value.
-    // Make find, and interigate the search.
-
-    // if (req.body == null){
-    //   resp.status(400);
-    //   resp.json({error: "No cat data sent with request"});
-    // }
-    // else {
-    //   resp.status(200);
-    //   resp.json(await this.catRepository.findOne(req.body));
-    // }
-    res.json({hello: "hello"});
+    if (!req.body.catId){
+      res.status(400).json({"error": "No catId provided"});
+    }
+    else {
+      try {
+        const foundCat = await this.catRepository.getCat(req.body);
+        if(foundCat){
+          res.status(200).json(foundCat);
+        }
+        else {
+          res.status(400).json({"error": "No cat with the catId " + req.body.catId + " found"});
+        }
+      }
+      catch(error){
+        res.status(500).json({error: error.message});
+        console.error("Error -> " + error.message);
+      }
+    }
   }
 }
 

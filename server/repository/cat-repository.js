@@ -3,8 +3,8 @@ class CatRepository {
     this.cat = _catModel;
   }
 
-  async getCat(id){
-    return this.cat.findOne({id});
+  async getCat(body){
+    return this.cat.findOne({catId : body.catId});
   }
 }
 
