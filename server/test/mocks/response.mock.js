@@ -2,6 +2,7 @@ class MockResponse {
   constructor(){
     this.body;
     this.statusCode;
+    this.cookie;
   }
 
   json(_body){
@@ -11,6 +12,10 @@ class MockResponse {
   status(_status){
     this.statusCode = _status;
     return this
+  }
+
+  cookie(){
+    this.cookie = "set cookie"
   }
 }
 

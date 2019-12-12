@@ -5,7 +5,8 @@ var CatModel = mongoose.model("Cat", {
   imageUrl: String,
   width: Number,
   height: Number,
-  score: Number
+  score: Number,
+  voteCookies:[String]
 });
 
 module.exports = CatModel;

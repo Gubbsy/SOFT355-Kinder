@@ -8,7 +8,8 @@ class MockCatModel {
       imageUrl: "https://caturl.com",
       width: 1920,
       height: 1080,
-      score: 1
+      score: 1,
+      voteCookies: []
     }
   }
 
@@ -20,7 +21,8 @@ class MockCatModel {
       imageUrl: "https://caturl-2.com",
       width: 1920,
       height: 1080,
-      score: 3
+      score: 3,
+      voteCookies: []
     },
     {
       _id: "2",
@@ -28,7 +30,8 @@ class MockCatModel {
       imageUrl: "https://caturl-2.com",
       width: 480,
       height: 480,
-      score: 2
+      score: 2,
+      voteCookies: []
     },
     {
       _id: "3",
@@ -36,7 +39,8 @@ class MockCatModel {
       imageUrl: "https://caturl-3.com",
       width: 720,
       height: 1240,
-      score: 5
+      score: 5,
+      voteCookies: []
     },
     {
       _id: "4",
@@ -44,7 +48,8 @@ class MockCatModel {
       imageUrl: "https://caturl-4.com",
       width: 1020,
       height: 720,
-      score: 6
+      score: 6,
+      voteCookies: []
     },
     {
       _id: "5",
@@ -52,7 +57,8 @@ class MockCatModel {
       imageUrl: "https://caturl-5.com",
       width: 920,
       height: 640,
-      score: 0
+      score: 0,
+      voteCookies: []
     }]
   }
 }

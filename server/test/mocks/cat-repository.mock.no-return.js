@@ -2,7 +2,11 @@ class MockCatRepository {
   constructor() {}
 
   async getCats(){
-    return 
+    return [];
+  }
+
+  async getUnvotedCats(){
+    return [];
   }
 }
 

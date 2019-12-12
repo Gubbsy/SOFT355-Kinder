@@ -23,6 +23,7 @@ describe("Cat Repository", function(){
       expect(cat.height).to.equal(1080)
       expect(cat.width).to.equal(1920)
       expect(cat.score).to.equal(1)
+      expect(cat.voteCookies).to.be.empty;
     });
   });
 
