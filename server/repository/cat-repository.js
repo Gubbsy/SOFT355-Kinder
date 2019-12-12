@@ -10,6 +10,11 @@ class CatRepository {
   async getCats(query) {
     return this.cat.find({},{},query);
   }
+
+  async getUnvotedCats(cookie) {
+    
+    return this.cat.find({voteCookies: {$ne: cookie}})
+  }
 }
 
 module.exports = CatRepository;

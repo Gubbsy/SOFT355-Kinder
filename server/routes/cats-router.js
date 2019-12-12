@@ -15,4 +15,10 @@ catRouter.get("/getCats", (req, res) => {
   catController.getCats(req, res);
 });
 
+catRouter.get("/getUnvotedCats", (req, res) => {
+  const catRepo = new CatRepository(CatModel);
+  const catController = new CatController(catRepo);
+  catController.getUnvotedCats(req, res);
+});
+
 module.exports = catRouter

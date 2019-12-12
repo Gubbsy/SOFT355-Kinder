@@ -16,7 +16,7 @@ class CatController {
           return;
         }
         else {
-          res.status(400).json({error: "No cat with the catId " + req.body.catId + " found"});
+          res.status(204);
           return;
         }
       } catch(error){
@@ -36,7 +36,7 @@ class CatController {
       res.status(400).json({error: "Page number or size must be set to an integer greater than 0"});
       return;
     }
-    
+
     const query = {
       skip: size * (pageNo -1),
       limit: size
@@ -44,11 +44,37 @@ class CatController {
 
     try{
       const cats = await this.catRepository.getCats(query);
-      if(cats){
+      
+      if(cats.length != 0){
         res.status(200).json(cats);
         return;
       } else {
-        res.status(500).json({"error": "No cats found in DB"});
+        res.status(204);
+        return;
+      }
+    } catch (error) {
+      res.status(500).json({error: error.message});
+      console.error("Error -> " + error.message);
+      return;
+    }
+  }
+
+  async getUnvotedCats(req, res) {
+    var time = Date.now();
+    var cookie = req.cookies.kinderCookie;
+    if (cookie === undefined)
+    {
+      var randomNumber=Math.random().toString() + time.toString();
+      randomNumber=randomNumber.substring(2,randomNumber.length);
+      res.cookie('kinderCookie', randomNumber , { maxAge: 365 * 60 * 60 * 1000, httpOnly: true });
+    } 
+    try{
+      const cats = await this.catRepository.getUnvotedCats(cookie);
+      if(cats.length != 0) {
+        res.status(200).json(cats);
+        return;
+      } else {
+        res.status(204);
         return;
       }
     } catch (error) {
