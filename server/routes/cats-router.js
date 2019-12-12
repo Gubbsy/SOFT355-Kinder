@@ -3,10 +3,16 @@ const CatRepository = require("../repository/cat-repository")
 const CatController = require("../controller/cat-controller")
 const CatModel = require("../model/cat-model")
 
-catRouter.get("/", (req, res) => {
+catRouter.get("/findCat", (req, res) => {
   const catRepo = new CatRepository(CatModel);
   const catController = new CatController(catRepo);
-  catController.getCat(req, res);
-})
+  catController.findCat(req, res);
+});
+
+catRouter.get("/getCats", (req, res) => {
+  const catRepo = new CatRepository(CatModel);
+  const catController = new CatController(catRepo);
+  catController.getCats(req, res);
+});
 
 module.exports = catRouter
