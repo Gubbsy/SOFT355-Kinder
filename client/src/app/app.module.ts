@@ -3,10 +3,14 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { VoteCatComponent } from './views/vote-cat/vote-cat.component';
+import { TopCatComponent } from './views/top-cat/top-cat.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    VoteCatComponent,
+    TopCatComponent
   ],
   imports: [
     BrowserModule,
