@@ -123,6 +123,10 @@ class MockCatRepository {
         voteCookies: []
       }]
   }
+
+  async voteCat(){
+    
+  }
 }
 
 module.exports = MockCatRepository

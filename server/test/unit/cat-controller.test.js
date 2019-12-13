@@ -291,4 +291,72 @@ describe("Cat Controller", function(){
     });
   });
 
+  ////////////////////////////////////////////////------Get Unvoted Cats - Test------///////////////////////////////////////////////
+
+  describe("Vote cat ", function() {
+    let req, res, catController, mockCatRepo
+
+    beforeEach(() =>{
+      mockCatRepo = new MockCatRepository();
+      catController = new CatController(mockCatRepo);
+    });
+
+    it("should set response status to 400 with empty _id body property", async function() {
+      req = new MockRequest({not_Id:"Meow", score: 1}, "headers");
+      res = new MockResponse();
+
+      await catController.voteCat(req, res);
+      expect(res.statusCode).to.equal(400);
+      expect(res.body).to.have.property("error").equal("No _id or score provided - score must be a number");
+    });
+
+    it("should set response status to 400 when score is not provided", async function() {
+      req = new MockRequest({_id: "Meow", not_score: 1}, "headers");
+      res = new MockResponse();
+
+      await catController.voteCat(req, res);
+      expect(res.statusCode).to.equal(400);
+      expect(res.body).to.have.property("error").equal("No _id or score provided - score must be a number");
+    });
+
+    it("should set response status to 400 when score is NaN", async function() {
+      req = new MockRequest({_id: "Meow", score: "Meow Meow"}, "headers");
+      res = new MockResponse();
+
+      await catController.voteCat(req, res);
+      expect(res.statusCode).to.equal(400);
+      expect(res.body).to.have.property("error").equal("No _id or score provided - score must be a number");
+    });
+
+    it("should set response status to 204 with valid score and _id", async function() {
+      req = new MockRequest({_id: "Meow", score: 3}, "headers");
+      res = new MockResponse();
+
+      await catController.voteCat(req, res);
+      expect(res.statusCode).to.equal(204);
+      expect(res.body).to.be.undefined;
+    });
+
+  });
+
+  describe("Vote catch error", function() {
+    let req, res, catController, mockCatRepo
+
+    beforeEach(() =>{
+      req = new MockRequest({_id: "Meow", score: 3}, "headers");
+      res = new MockResponse();
+
+      mockCatRepo = new MockCatRepositoryThrow();
+      catController = new CatController(mockCatRepo);
+    });
+
+    it("should catch repository error", async function() {
+      await catController.voteCat(req, res);
+
+      expect(res.statusCode).to.equal(500);
+      expect(res.body).to.have.property("error").equal("Error voting cat");
+
+    });
+  });
+  
 });
