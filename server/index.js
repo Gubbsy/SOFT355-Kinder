@@ -1,6 +1,8 @@
 const express = require("express");
 var mongoose = require("mongoose");
+var cors = require('cors')
 const app = express();
+
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser');
 const routes = require("./routes/router");
@@ -10,13 +12,14 @@ require('dotenv').config();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(cors());
 
 app.use(routes);
 port = process.env.PORT || 3000;
 mongoCon = process.env.MONGO_URI;
 
 app.listen(port, function() {
-  console.log("Server listening on port " + port);
+  console.log("CORS - enabled. Server listening on port " + port);
 
   mongoose.connect(mongoCon, {useNewUrlParser: true, useUnifiedTopology: true}).then((test) => {
     console.log("Connected to DB");

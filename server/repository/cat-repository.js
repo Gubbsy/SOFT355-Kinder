@@ -17,7 +17,8 @@ class CatRepository {
   }
 
   async voteCat(body) {
-    this.cat.updateOne({_id: body._id}, {score: body.score});
+    console.log(JSON.stringify(body.catId));
+    return this.cat.updateOne({catId : body.catId}, {score: body.score});
   }
 }
 
