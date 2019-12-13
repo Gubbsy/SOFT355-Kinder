@@ -60,6 +60,8 @@ class CatController {
   }
 
   async getUnvotedCats(req, res) {
+    console.log("getUnvotedCats called");
+    
     var time = Date.now();
     var cookie = req.cookies.kinderCookie;
     if (cookie === undefined)
@@ -85,14 +87,15 @@ class CatController {
   }
 
   async voteCat(req, res) {
-    if (!req.body._id || !req.body.score || isNaN(req.body.score)){
-      res.status(400).json({"error": "No _id or score provided - score must be a number"});
+    console.log("voteCat called");
+    if (!req.body.catId || !req.body.score || isNaN(req.body.score)){
+      res.status(400).json({"error": "No catId or score provided - score must be a number"});
     }
     else {
       try {
-        await this.catRepository.voteCat(req.body);
-          res.status(204).json();
-          return;
+        let result = await this.catRepository.voteCat(req.body);
+        res.status(204).json();
+        return;
       } catch(error){
         res.status(500).json({error: error.message});
         console.error("Error -> " + error.message);
