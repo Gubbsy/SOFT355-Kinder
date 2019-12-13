@@ -13,7 +13,11 @@ class CatRepository {
 
   async getUnvotedCats(cookie) {
     
-    return this.cat.find({voteCookies: {$ne: cookie}})
+    return this.cat.find({voteCookies: {$ne: cookie}});
+  }
+
+  async voteCat(body) {
+    this.cat.updateOne({_id: body._id}, {score: body.score});
   }
 }
 

@@ -83,6 +83,23 @@ class CatController {
       return;
     }
   }
+
+  async voteCat(req, res) {
+    if (!req.body._id || !req.body.score || isNaN(req.body.score)){
+      res.status(400).json({"error": "No _id or score provided - score must be a number"});
+    }
+    else {
+      try {
+        await this.catRepository.voteCat(req.body);
+          res.status(204).json();
+          return;
+      } catch(error){
+        res.status(500).json({error: error.message});
+        console.error("Error -> " + error.message);
+        return;
+      }
+    }
+  }
 }
 
 module.exports = CatController

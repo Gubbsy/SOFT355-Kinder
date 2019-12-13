@@ -21,4 +21,16 @@ catRouter.get("/getUnvotedCats", (req, res) => {
   catController.getUnvotedCats(req, res);
 });
 
+catRouter.post("/getUnvotedCats", (req, res) => {
+  const catRepo = new CatRepository(CatModel);
+  const catController = new CatController(catRepo);
+  catController.voteCat(req, res);
+});
+
+catRouter.post("/voteCat", (req, res) => {
+  const catRepo = new CatRepository(CatModel);
+  const catController = new CatController(catRepo);
+  catController.voteCat(req, res);
+});
+
 module.exports = catRouter
