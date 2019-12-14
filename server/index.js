@@ -1,7 +1,10 @@
 const express = require("express");
 var mongoose = require("mongoose");
 var cors = require('cors')
-const app = express();
+
+var app = require('express')();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser');
@@ -29,7 +32,7 @@ app.use(routes);
 port = process.env.PORT || 3000;
 mongoCon = process.env.MONGO_URI;
 
-app.listen(port, function() {
+server.listen(port, function() {
   console.log("CORS - enabled. Server listening on port " + port);
 
   mongoose.connect(mongoCon, {useNewUrlParser: true, useUnifiedTopology: true}).then((test) => {
