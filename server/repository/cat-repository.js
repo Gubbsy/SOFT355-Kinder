@@ -12,14 +12,18 @@ class CatRepository {
   }
 
   async getUnvotedCats(cookie) {
-    
     return this.cat.find({voteCookies: {$ne: cookie}});
   }
 
   async voteCat(body) {
-    console.log(JSON.stringify(body.catId));
     return this.cat.updateOne({catId : body.catId}, {score: body.score});
   }
+
+  async addCookie(body, cookie) {
+    console.log(JSON.stringify(body.catId) + "cookie: " + cookie);
+    return this.cat.updateOne({catId : body.catId}, {$addToSet: { voteCookies: cookie }})
+  }
+
 }
 
 module.exports = CatRepository;

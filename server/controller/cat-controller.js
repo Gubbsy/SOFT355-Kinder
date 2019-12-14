@@ -88,12 +88,14 @@ class CatController {
 
   async voteCat(req, res) {
     console.log("voteCat called");
+    var cookie = req.cookies.kinderCookie;
     if (!req.body.catId || !req.body.score || isNaN(req.body.score)){
       res.status(400).json({"error": "No catId or score provided - score must be a number"});
     }
     else {
       try {
-        let result = await this.catRepository.voteCat(req.body);
+        await this.catRepository.voteCat(req.body);
+        await this.catRepository.addCookie(req.body, cookie);
         res.status(204).json();
         return;
       } catch(error){
