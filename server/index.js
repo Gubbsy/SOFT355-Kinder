@@ -8,11 +8,22 @@ const bodyParser = require('body-parser');
 const routes = require("./routes/router");
 require('dotenv').config();
 
+var whitelist = ['http://localhost:4200']
+
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }, credentials: true
+}
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use(routes);
 port = process.env.PORT || 3000;

@@ -61,7 +61,6 @@ class CatController {
 
   async getUnvotedCats(req, res) {
     console.log("getUnvotedCats called");
-    
     var time = Date.now();
     var cookie = req.cookies.kinderCookie;
     if (cookie === undefined)
