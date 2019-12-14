@@ -20,7 +20,6 @@ class CatRepository {
   }
 
   async addCookie(body, cookie) {
-    console.log(JSON.stringify(body.catId) + "cookie: " + cookie);
     return this.cat.updateOne({catId : body.catId}, {$addToSet: { voteCookies: cookie }})
   }
 

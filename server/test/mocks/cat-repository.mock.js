@@ -127,6 +127,10 @@ class MockCatRepository {
   async voteCat(){
     
   }
+
+  async addCookie() {
+    
+  }
 }
 
 module.exports = MockCatRepository

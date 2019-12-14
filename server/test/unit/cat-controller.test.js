@@ -302,7 +302,7 @@ describe("Cat Controller", function(){
     });
 
     it("should set response status to 400 with empty _id body property", async function() {
-      req = new MockRequest({not_Id:"Meow", score: 1}, "headers");
+      req = new MockRequest({not_Id:"Meow", score: 1}, "headers", {}, cookie = {kinderCookie: ""});
       res = new MockResponse();
 
       await catController.voteCat(req, res);
@@ -311,7 +311,7 @@ describe("Cat Controller", function(){
     });
 
     it("should set response status to 400 when score is not provided", async function() {
-      req = new MockRequest({catId: "Meow", not_score: 1}, "headers");
+      req = new MockRequest({catId: "Meow", not_score: 1}, "headers", {}, cookie = {kinderCookie: ""});
       res = new MockResponse();
 
       await catController.voteCat(req, res);
@@ -320,7 +320,7 @@ describe("Cat Controller", function(){
     });
 
     it("should set response status to 400 when score is NaN", async function() {
-      req = new MockRequest({catId: "Meow", score: "Meow Meow"}, "headers");
+      req = new MockRequest({catId: "Meow", score: "Meow Meow"}, "headers", {}, cookie = {kinderCookie: ""});
       res = new MockResponse();
 
       await catController.voteCat(req, res);
@@ -328,8 +328,8 @@ describe("Cat Controller", function(){
       expect(res.body).to.have.property("error").equal("No catId or score provided - score must be a number");
     });
 
-    it("should set response status to 204 with valid score and _id", async function() {
-      req = new MockRequest({catId: "Meow", score: 3}, "headers");
+    it("should set response status to 204 with valid score and catId", async function() {
+      req = new MockRequest({catId: "Meow", score: 1}, "headers", {}, cookie = {kinderCookie: ""});
       res = new MockResponse();
 
       await catController.voteCat(req, res);
@@ -343,7 +343,7 @@ describe("Cat Controller", function(){
     let req, res, catController, mockCatRepo
 
     beforeEach(() =>{
-      req = new MockRequest({catId: "Meow", score: 3}, "headers");
+      req = new MockRequest({catId: "Meow", score: 1}, "headers", {}, cookie = {kinderCookie: ""});
       res = new MockResponse();
 
       mockCatRepo = new MockCatRepositoryThrow();
