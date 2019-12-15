@@ -1,10 +1,14 @@
 const express = require("express");
-var mongoose = require("mongoose");
-var cors = require('cors')
+const mongoose = require("mongoose");
+const cors = require('cors')
 
-var app = require('express')();
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
+const app = require('express')();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+
+const SocketController = require('./controller/socket-controller');
+const CatRepository = require("./repository/cat-repository")
+const CatModel = require("./model/cat-model")
 
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser');
@@ -32,6 +36,9 @@ app.use(routes);
 port = process.env.PORT || 3000;
 mongoCon = process.env.MONGO_URI;
 
+
+socketController = new SocketController();
+
 server.listen(port, function() {
   console.log("CORS - enabled. Server listening on port " + port);
 
@@ -40,3 +47,10 @@ server.listen(port, function() {
   })
   .catch(error => console.log("Error -> " + error));
 })
+
+io.on('connection', function (socket) {
+  const catRepo = new CatRepository(CatModel);
+  const socketController = new SocketController(catRepo);
+  socketController.handleConnection(socket, io)
+});
+

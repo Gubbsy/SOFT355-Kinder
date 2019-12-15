@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const catRouter = require("./cats-router");
 
-
 var helloControler = require("../controller/helloWorldControler");
 
 router.get('/', function(req, res) {

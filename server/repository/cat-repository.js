@@ -23,6 +23,10 @@ class CatRepository {
     return this.cat.updateOne({catId : body.catId}, {$addToSet: { voteCookies: cookie }})
   }
 
+  async getTopCats() {
+    return this.cat.find({score: {$exists: true}}).sort({score: -1}).limit(5)
+  }
+
 }
 
 module.exports = CatRepository;

@@ -37,7 +37,7 @@ function Seed(){
   mongoose.connect(mongoCon, {useNewUrlParser: true, useUnifiedTopology: true}).then((test) => {
     console.log("Connected to DB");
     
-    for(i = 0; i < 100; i++) {
+    for(i = 0; i < 25; i++) {
       AddCat();
     }
   });
