@@ -10,8 +10,8 @@ export class SocketServiceMock {
   private messageSpy = new Subject<string>();
   private messageHandler = this.messageSpy.asObservable();
 
-  catVote(message:any) {
-    this.messageSpy.next();
+  catVoted() {
+    console.log("Cat Voted Socket");
   }
 
   onNewMessage() {
