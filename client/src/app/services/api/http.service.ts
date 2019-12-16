@@ -16,15 +16,11 @@ export default class HttpService {
   constructor(private http: HttpClient) { }
 
   getUnvotedCats() {
-    
+    return this.http.get<ICatResponse[]>(this.baseURI + '/getUnvotedCats', { observe: 'response', withCredentials: true }).toPromise();
   }
 
   voteCat(vote: IVoteRequest) {
-   
-  }
-
-  setCookie() {
-
+    this.http.post(this.baseURI + '/voteCat', vote, {withCredentials: true} ).toPromise();
   }
 
 }
