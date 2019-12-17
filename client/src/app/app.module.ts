@@ -3,18 +3,20 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { VoteCatComponent } from './views/vote-cat/vote-cat.component';
-import { TopCatComponent } from './views/top-cat/top-cat.component';
+import { HttpClientModule } from '@angular/common/http';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:9000', options: {transports: ['websocket']} };
 
 @NgModule({
   declarations: [
     AppComponent,
-    VoteCatComponent,
-    TopCatComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,16 +7,13 @@ import { SocketServiceMock } from 'src/mocks/socket-service.mock';
 import { HttpServiceMock } from 'src/mocks/http.server.mock';
 import { IVoteRequest } from 'src/app/models/request/vote.request';
 import { exec } from 'child_process';
+import { By } from '@angular/platform-browser';
 
 describe('VoteCatComponent', () => {
   let component: VoteCatComponent;
   let fixture: ComponentFixture<VoteCatComponent>;
   let socketService: SocketService;
   let httpService: HttpService;
-
-  // beforeAll(() => {
-  //   TestBed.resetTestEnvironment();
-  // });
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -37,7 +34,7 @@ describe('VoteCatComponent', () => {
 
   }));
 
-  afterEach(() =>{
+  afterEach(() => {
     fixture.destroy();
   });
 
@@ -68,8 +65,37 @@ describe('VoteCatComponent', () => {
     console.log("Cats size: " + component.cats.length)
     expect(httpService.voteCat).toHaveBeenCalledWith(vote);
     expect(socketService.catVoted).toHaveBeenCalled();
-    expect(component.cats.length).toEqual(numCatsBefore -1);
+    expect(component.cats.length).toEqual(numCatsBefore - 1);
   }));
 
+  it('Should set cat to errorCat if there is a http error', fakeAsync(() => {
+    component.cats = [];
+    component.currentCat = null;
 
+    spyOn(httpService, "getUnvotedCats").and.throwError("http error");
+    component.getUnvotedCats();
+    tick();
+    expect(component.currentCat.imageUrl).toEqual('/assets/images/error-cat.jpg');
+  }));
+
+  it('Should set not call http servie or socket srevice if there are no cats to vote', fakeAsync(() => {
+    component.cats = [];
+
+    spyOn(httpService, "voteCat");
+    spyOn(socketService, "catVoted");
+    component.voteCat(3);
+    tick();
+    expect(httpService.voteCat).not.toHaveBeenCalled();
+    expect(socketService.catVoted).not.toHaveBeenCalled();
+  }));
+
+  it('should render a cat image', () => {
+    let catImage = fixture.debugElement.query(By.css('.catImg'));
+    expect(catImage).not.toBeNull();
+  });
+
+  it('should render image buttons', () => {
+    let voteButtons = fixture.debugElement.query(By.css('.rateButton'));
+    expect(voteButtons).not.toBeNull();
+  });
 });

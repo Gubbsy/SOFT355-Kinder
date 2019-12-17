@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { TopCatComponent } from './views/top-cat/top-cat.component';
-import { VoteCatComponent } from './views/vote-cat/vote-cat.component';
-
+import { VoteCatModule } from './views/vote-cat/vote-cat.module';
 
 const routes: Routes = [
-  { path: 'vote-cats', component: VoteCatComponent },
-  { path: 'top-cats', component: TopCatComponent }
+  { path: '', redirectTo: 'kinder',  pathMatch: 'full'},
+  { path: 'kinder', loadChildren: () => VoteCatModule },
 ];
 
 @NgModule({
