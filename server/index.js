@@ -54,3 +54,5 @@ io.on('connection', function (socket) {
   socketController.handleConnection(socket, io)
 });
 
+module.exports = app;
+
