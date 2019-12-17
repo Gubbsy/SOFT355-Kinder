@@ -1,0 +1,114 @@
+body {
+  background-color: #828583
+}
+
+h2 {
+  text-align: center;
+  color: #db9730;
+}
+
+.rateCats {
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.currentCat {
+  text-align: center;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  margin: 60px auto;
+}
+
+.topCats {
+  margin: 100px auto;
+  text-align: center;
+}
+
+.topTitle{
+  padding: 20px;
+  background-color: #575552;
+  color: white;
+}
+
+.rateButton {
+  max-width: 160px;
+  max-height: 160px;
+}
+
+.rateButton:hover {
+  -webkit-filter: drop-shadow(0 0 5px #222);
+  -moz-filter: drop-shadow(0 0 5px #222);
+  filter: drop-shadow(0 0 5px #222);
+}
+
+.rateButton:active {
+  -webkit-filter: drop-shadow(0 0 5px #000);
+  -moz-filter: drop-shadow(0 0 5px #000);
+  filter: drop-shadow(0 0 5px #000);
+}
+
+.scene {
+  position: relative;
+}
+
+.catImg {
+  border:solid 2px;
+  border-bottom-color:#ffe;
+  border-left-color:#eed;
+  border-right-color:#eed;
+  border-top-color:#ccb;
+  max-height:160px;
+  max-width:100%;
+}
+
+.frame:before {
+  border-radius:2px;
+  bottom:-2vmin;
+  box-shadow:0 2px 5px 0 rgba(0,0,0,.25) inset;
+  content:"";
+  left:-2vmin;
+  position:absolute;
+  right:-2vmin;
+  top:-2vmin;
+}
+.frame:after {
+  border-radius:2px;
+  bottom:-2.5vmin;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.25);
+  content:"";
+  left:-2.5vmin;
+  position:absolute;
+  right:-2.5vmin;
+  top:-2.5vmin;
+}
+.frame {
+  background-color:#ddc;
+  border:solid 5vmin #eee;
+  border-bottom-color:#fff;
+  border-left-color:#eee;
+  border-radius:2px;
+  border-right-color:#eee;
+  border-top-color:#ddd;
+  box-shadow:0 0 5px 0 rgba(0,0,0,.25) inset, 0 5px 10px 5px rgba(0,0,0,.25);
+  box-sizing:border-box;
+  display:inline-block;
+  padding:8vmin;
+  position:relative;
+  text-align:center;
+  margin: 30px;
+}
+
+.catImgTop {
+  border:solid 2px;
+  border-bottom-color:#ffe;
+  border-left-color:#eed;
+  border-right-color:#eed;
+  border-top-color:#ccb;
+  max-height:160px;
+  max-width:100%;
+}

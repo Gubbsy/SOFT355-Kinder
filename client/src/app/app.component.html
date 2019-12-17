@@ -1,6 +1,19 @@
-<h1>Tool bar</h1>
-<nav>
-  <a routerLink="/top-cats">top-cats</a>
-  <a routerLink="/vote-cats">vote-cat</a>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+  <a class="navbar-brand" href="#">Kinder</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/kinder" fragment="rateCats">Rate Kitties</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/kinder" fragment="topCats">Top Kitties</a>
+      </li>
+    </ul>
+  </div>
 </nav>
 <router-outlet></router-outlet>

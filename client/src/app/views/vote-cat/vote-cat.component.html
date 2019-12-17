@@ -1,1 +1,27 @@
+<a name="rateCats"></a>
 <p>vote-cat works!</p>
+<div class="rateCats"> 
+  <div class="currentCat">
+    <div class="frame">
+      <img src="{{currentCat.imageUrl}}" class="catImg">
+    </div>
+  </div>
+ 
+  <h2>How cute is this cat?</h2>
+  <div class="buttons">
+    <img (click)="voteCat(1)" src="/assets/images/thumbs-ok.png" class="rateButton"/>
+    <img (click)="voteCat(2)" src="/assets/images/thumbs-up.png" class="rateButton"/>
+    <img (click)="voteCat(3)" src="/assets/images/heart.png" class="rateButton"/>
+  </div>
+</div>
+
+<a name="topCats"></a>
+<div class="topCats">
+  <h1 class="topTitle">Top Cats!</h1>
+ 
+  <div *ngFor="let cat of topCats"  class="frame">
+    <img src="{{cat.imageUrl}}" class="catImgTop"/>
+  </div>
+</div>
+
+
