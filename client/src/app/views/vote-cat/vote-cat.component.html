@@ -9,9 +9,28 @@
  
   <h2>How cute is this cat?</h2>
   <div class="buttons">
-    <img (click)="voteCat(1)" src="/assets/images/thumbs-ok.png" class="rateButton"/>
-    <img (click)="voteCat(2)" src="/assets/images/thumbs-up.png" class="rateButton"/>
-    <img (click)="voteCat(3)" src="/assets/images/heart.png" class="rateButton"/>
+    <div class="rateButton">
+      <img (click)="voteCat(1)"  src="/assets/images/thumbs-up.png"/>
+      <div class="scoreAdd">
+        <p>+1</p>
+        <img src="/assets/images/love-heart.png" class="heart"/>
+      </div>
+    </div>
+    <div class="rateButton">
+      <img (click)="voteCat(2)" src="/assets/images/thumbs-ok.png"/>
+      <div class="scoreAdd">
+        <p>+2</p>
+        <img src="/assets/images/love-heart.png" class="heart"/>
+      </div>
+    </div>
+    <div class="rateButton">
+      <img (click)="voteCat(3)" src="/assets/images/heart.png" />
+      <div class="scoreAdd">
+        <p>+3</p>
+        <img src="/assets/images/love-heart.png" class="heart"/>
+      </div>
+    </div>
+    
   </div>
 </div>
 
@@ -21,6 +40,7 @@
  
   <div *ngFor="let cat of topCats"  class="frame">
     <img src="{{cat.imageUrl}}" class="catImgTop"/>
+      <p class ="catName"> #{{topCats.indexOf(cat) + 1}}</p>
   </div>
 </div>
 
