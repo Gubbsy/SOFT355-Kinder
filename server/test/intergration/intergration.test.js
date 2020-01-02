@@ -82,13 +82,13 @@ describe('Cats', () => {
     it("should get with specifie cat ID", (done) => {
       chai.request(url)
         .get('/findCat')
-        .send({catId: "3ZLqhbgiw"})
+        .send({catId: "WunURq5Hx"})
         .end((err, res) => {
           res.should.have.status(200);
           expect(res.body).to.not.be.null;
           expect(res.body).to.have.property("voteCookies");
           expect(res.body).to.have.property("_id");
-          expect(res.body).to.have.property("catId", "3ZLqhbgiw");
+          expect(res.body).to.have.property("catId", "WunURq5Hx");
           expect(res.body).to.have.property("imageUrl");
           expect(res.body).to.have.property("width");
           expect(res.body).to.have.property("height");

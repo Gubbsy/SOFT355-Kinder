@@ -36,9 +36,6 @@ app.use(routes);
 port = process.env.PORT || 3000;
 mongoCon = process.env.MONGO_URI;
 
-
-socketController = new SocketController();
-
 server.listen(port, function() {
   console.log("CORS - enabled. Server listening on port " + port);
 
