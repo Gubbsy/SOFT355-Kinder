@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "nyc mocha -ui bdd test/unit/**.test.js",
-    "int-test": "nyc mocha -ui bdd test/intergration/**.test.js",
+    "test-int": "nyc mocha -ui bdd test/intergration/**.test.js",
     "start": "nodemon server.js"
   },
   "author": "",
