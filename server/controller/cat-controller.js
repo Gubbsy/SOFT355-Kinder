@@ -4,23 +4,105 @@ class CatController {
     this.catRepository = _catRepository;
   }
   
-  async getCat(req, res) {
-    console.log("hit cat controller")
+  async findCat(req, res) {
+    if (!req.body.catId){
+      res.status(400).json({"error": "No catId provided"});
+    }
+    else {
+      try {
+        const foundCat = await this.catRepository.findCat(req.body);
+        if(foundCat){
+          res.status(200).json(foundCat);
+          return;
+        }
+        else {
+          res.status(204);
+          return;
+        }
+      } catch(error){
+        res.status(500).json({error: error.message});
+        console.error("Error -> " + error.message);
+        return;
+      }
+    }
+  }
 
-    let cat = this.catRepository.getCat(1)
+  async getCats(req, res) {
+    
+    let pageNo = Number(req.query.pageNo);
+    let size = Number(req.query.size);
 
-    //cheeck recieved valid search value.
-    // Make find, and interigate the search.
+    if (!pageNo || pageNo <=0 || !size || size <= 0 ){
+      res.status(400).json({error: "Page number or size must be set to an integer greater than 0"});
+      return;
+    }
 
-    // if (req.body == null){
-    //   resp.status(400);
-    //   resp.json({error: "No cat data sent with request"});
-    // }
-    // else {
-    //   resp.status(200);
-    //   resp.json(await this.catRepository.findOne(req.body));
-    // }
-    res.json({hello: "hello"});
+    const query = {
+      skip: size * (pageNo -1),
+      limit: size
+    }
+
+    try{
+      const cats = await this.catRepository.getCats(query);
+      
+      if(cats.length != 0){
+        res.status(200).json(cats);
+        return;
+      } else {
+        res.status(204);
+        return;
+      }
+    } catch (error) {
+      res.status(500).json({error: error.message});
+      console.error("Error -> " + error.message);
+      return;
+    }
+  }
+
+  async getUnvotedCats(req, res) {
+    console.log("getUnvotedCats called");
+    var time = Date.now();
+    var cookie = req.cookies.kinderCookie;
+    if (cookie === undefined)
+    {
+      var randomNumber=Math.random().toString() + time.toString();
+      randomNumber=randomNumber.substring(2,randomNumber.length);
+      res.cookie('kinderCookie', randomNumber , { maxAge: 365 * 60 * 60 * 1000, httpOnly: true });
+    } 
+    try{
+      const cats = await this.catRepository.getUnvotedCats(cookie);
+      if(cats.length != 0) {
+        res.status(200).json(cats);
+        return;
+      } else {
+        res.status(204);
+        return;
+      }
+    } catch (error) {
+      res.status(500).json({error: error.message});
+      console.error("Error -> " + error.message);
+      return;
+    }
+  }
+
+  async voteCat(req, res) {
+    console.log("voteCat called");
+    var cookie = req.cookies.kinderCookie;
+    if (!req.body.catId || !req.body.score || isNaN(req.body.score)){
+      res.status(400).json({"error": "No catId or score provided - score must be a number"});
+    }
+    else {
+      try {
+        await this.catRepository.voteCat(req.body);
+        await this.catRepository.addCookie(req.body, cookie);
+        res.status(204).json();
+        return;
+      } catch(error){
+        res.status(500).json({error: error.message});
+        console.error("Error -> " + error.message);
+        return;
+      }
+    }
   }
 }
 

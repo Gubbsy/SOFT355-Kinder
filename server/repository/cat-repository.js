@@ -3,9 +3,30 @@ class CatRepository {
     this.cat = _catModel;
   }
 
-  async getCat(id){
-    return this.cat.findOne({id});
+  async findCat(body){
+    return this.cat.findOne({catId : body.catId});
   }
+
+  async getCats(query) {
+    return this.cat.find({},{},query);
+  }
+
+  async getUnvotedCats(cookie) {
+    return this.cat.find({voteCookies: {$ne: cookie}});
+  }
+
+  async voteCat(body) {
+    return this.cat.updateOne({catId : body.catId}, {score: body.score});
+  }
+
+  async addCookie(body, cookie) {
+    return this.cat.updateOne({catId : body.catId}, {$addToSet: { voteCookies: cookie }})
+  }
+
+  async getTopCats() {
+    return this.cat.find({score: {$exists: true}}).sort({score: -1}).limit(5)
+  }
+
 }
 
 module.exports = CatRepository;
